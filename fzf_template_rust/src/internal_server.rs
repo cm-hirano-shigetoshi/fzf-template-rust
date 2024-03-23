@@ -12,10 +12,11 @@ impl InternalServer {
 
     pub fn start_async(&mut self) {
         if self.child.is_none() {
+            let exe_path = env::current_exe().unwrap();
+            let resolved_path = std::fs::read_link(&exe_path).unwrap_or(exe_path);
             let _child = Command::new("python")
                 .arg(
-                    env::current_exe()
-                        .unwrap()
+                    resolved_path
                         .parent()
                         .unwrap()
                         .parent()
