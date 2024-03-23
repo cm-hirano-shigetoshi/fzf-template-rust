@@ -2,11 +2,14 @@ use std::env;
 use std::io::{Error, Result};
 use std::process::{Command, Stdio};
 
-pub struct Fzf {
-    pub proc: Option<std::process::Child>,
-}
+pub struct Fzf {}
 
 impl Fzf {
+    pub fn new() -> Self {
+        // 同期処理なので保持する変数なし
+        Fzf {}
+    }
+
     pub fn start(&mut self) -> Result<String> {
         let output = Command::new("sh")
             .arg("-c")

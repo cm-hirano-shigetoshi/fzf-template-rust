@@ -9,7 +9,7 @@ impl InternalServer {
         InternalServer { child: None }
     }
 
-    pub fn start(&mut self) {
+    pub fn start_async(&mut self) {
         if self.child.is_none() {
             let _child = Command::new("python")
                 .arg("server.py")

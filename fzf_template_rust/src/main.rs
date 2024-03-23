@@ -12,10 +12,10 @@ fn main() {
 
     // serverを起動する
     let mut server = InternalServer::new();
-    server.start();
+    server.start_async();
 
     // fzfのプロセスを開始
-    let mut fzf = Fzf { proc: None };
+    let mut fzf = Fzf::new();
     let stdout = fzf.start();
     print!("{}", stdout.unwrap_or_else(|_err| String::from("")))
 }
