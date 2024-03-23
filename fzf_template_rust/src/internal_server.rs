@@ -11,7 +11,7 @@ impl InternalServer {
 
     pub fn start(&mut self) {
         if self.child.is_none() {
-            let child = Command::new("python")
+            let _child = Command::new("python")
                 .arg("server.py")
                 .spawn()
                 .expect("failed to start server.py");
