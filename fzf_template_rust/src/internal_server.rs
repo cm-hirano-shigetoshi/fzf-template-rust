@@ -1,3 +1,4 @@
+use std::env;
 use std::process::{Child, Command};
 
 pub struct InternalServer {
@@ -12,7 +13,17 @@ impl InternalServer {
     pub fn start_async(&mut self) {
         if self.child.is_none() {
             let _child = Command::new("python")
-                .arg("server.py")
+                .arg(
+                    env::current_exe()
+                        .unwrap()
+                        .parent()
+                        .unwrap()
+                        .parent()
+                        .unwrap()
+                        .parent()
+                        .unwrap()
+                        .join("python/server.py"),
+                )
                 .spawn()
                 .expect("failed to start server.py");
         } else {
