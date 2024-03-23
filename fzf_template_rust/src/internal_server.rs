@@ -6,13 +6,19 @@ pub struct InternalServer {
 
 impl InternalServer {
     pub fn new() -> Self {
-        let child = Command::new("python")
-            .arg("server.py")
-            .spawn()
-            .expect("failed to start server.py");
-        InternalServer { child: Some(child) }
+        InternalServer { child: None }
     }
 
+    pub fn start(&mut self) {
+        if self.child.is_none() {
+            let child = Command::new("python")
+                .arg("server.py")
+                .spawn()
+                .expect("failed to start server.py");
+        } else {
+            println!("Server is already running.");
+        }
+    }
     pub fn stop(&mut self) {
         if let Some(mut child) = self.child.take() {
             child.kill().expect("Command failed to kill the process");

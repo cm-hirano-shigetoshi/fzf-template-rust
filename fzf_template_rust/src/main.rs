@@ -11,7 +11,8 @@ fn main() {
     env::set_var("SERVER_PORT", utils::find_free_port().unwrap().to_string());
 
     // serverを起動する
-    InternalServer::new();
+    let mut server = InternalServer::new();
+    server.start();
 
     // fzfのプロセスを開始
     let mut fzf = Fzf { proc: None };

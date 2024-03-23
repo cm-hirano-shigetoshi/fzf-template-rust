@@ -38,8 +38,6 @@ def set_initial_source():
 
 
 def start():
-    with open("/tmp/aaa", "a") as f:
-        print(os.environ["SERVER_PORT"], file=f)
     httpd = HTTPServer(("", int(os.environ["SERVER_PORT"])), RequestHandler)
     httpd.serve_forever()
 
